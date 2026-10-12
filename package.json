@@ -1,0 +1,29 @@
+{
+  "name": "hivebox",
+  "version": "0.0.1",
+  "description": "",
+  "homepage": "https://github.com/dev1joe/devops-project-hivebox#readme",
+  "bugs": {
+    "url": "https://github.com/dev1joe/devops-project-hivebox/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dev1joe/devops-project-hivebox.git"
+  },
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch --env-file=.env src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^5.3.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/node": "^26.6.5",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2"
+  }
+}

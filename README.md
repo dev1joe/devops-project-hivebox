@@ -51,5 +51,17 @@ Here is a pre-start checklist:
 ---
 
 ## Implementation
+### Project Initialization
+```bash
+npm init -y
+npm i express
+npm i -D typescript tsx vitest supertest @types/node @types/express @types/supertest
+npx tsc --init
+```
+
+testing libraries
+```bash
+npm i -D vitest supertest @types/supertest
+```
 
 ** ADD YOUR IMPLEMENTATION DOCUMENTATION HERE **
