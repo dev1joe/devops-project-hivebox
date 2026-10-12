@@ -51,5 +51,10 @@ Here is a pre-start checklist:
 ---
 
 ## Implementation
+app initial dependencies:
+```python3
+pip install fastapi uvicorn pydantic-settings python-dotenv
+```
+
 
 ** ADD YOUR IMPLEMENTATION DOCUMENTATION HERE **
