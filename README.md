@@ -55,7 +55,7 @@ Here is a pre-start checklist:
 ```bash
 npm init -y
 npm i express
-npm i -D typescript tsx vitest supertest @types/node @types/express @types/supertest
+npm i -D typescript tsx @types/node @types/express
 npx tsc --init
 ```
 
@@ -64,4 +64,23 @@ testing libraries
 npm i -D vitest supertest @types/supertest
 ```
 
-** ADD YOUR IMPLEMENTATION DOCUMENTATION HERE **
+installing mogan middleware for request logging
+```bash
+npm i morgan
+npm i -D @types/morgan
+```
+
+tsconfig
+- either use `NodeNext` for module and module resolution with no bundler
+- or use a bundler (like `esbuild` or `tsup`) and set module to `ESNext` and module resolution to `bundler`
+- using a bundler will allow you to use relative imports without file extensions but will add an extra build step
+
+### API Details
+- app structure:
+  - routers (route groups)
+  - morgan (logging middleware)
+  - 404 not found middleware
+  - Error-Handler
+
+## testing
+- run `npm run test`
