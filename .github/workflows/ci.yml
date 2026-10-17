@@ -67,7 +67,7 @@ jobs:
       - name: Check /api/version
         run: |
           expected="$(jq -r .version package.json)"
-          response="$(curl --fail --silent --show-error --retry 10 --retry-delay 1 --retry-all-errors http://localhost:3000/api/version)"
+          response="$(curl --fail --silent --show-error --retry 3 --retry-delay 1 --retry-all-errors http://localhost:3000/api/version)"
           echo "response=$response"
           actual="$(echo "$response" | jq -r .version)"
           echo "expected=$expected actual=$actual"
