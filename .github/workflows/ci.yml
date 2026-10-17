@@ -52,12 +52,12 @@ jobs:
       - name: Run container
         run: docker run -d --name hivebox -p 3000:3000 hivebox:ci
 
-      - name: Check /version
+      - name: Check /api/version
         run: |
           expected="$(jq -r .version package.json)"
-          actual="$(curl --fail --silent --retry 10 --retry-delay 1 --retry-connrefused http://localhost:3000/version)"
+          actual="$(curl --fail --silent --retry 10 --retry-delay 1 --retry-connrefused http://localhost:3000/api/version | jq -r .version)"
           echo "expected=$expected actual=$actual"
-          if ["$expected" != "$actual"]; then
+          if [ "$expected" != "$actual" ]; then
             echo "Error: Version mismatch! expected '$expected' from package.json, but endpoint returned '$actual'."
             exit 1
           fi
