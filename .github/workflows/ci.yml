@@ -52,6 +52,18 @@ jobs:
       - name: Run container
         run: docker run -d --name hivebox -p 3000:3000 hivebox:ci
 
+      - name: Wait for healthy container
+        run: |
+          for i in $(seq 1 30); do
+            status="$(docker inspect --format '{{.State.Health.Status}}' hivebox)"
+            echo "attempt $i: $status"
+            [ "$status" = "healthy" ] && exit 0
+            [ "$status" = "unhealthy" ] && break
+            sleep 2
+          done
+          echo "Container never became healthy"
+          exit 1
+
       - name: Check /api/version
         run: |
           expected="$(jq -r .version package.json)"

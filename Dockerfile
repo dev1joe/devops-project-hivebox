@@ -38,5 +38,8 @@ COPY --chown=node:node --from=build /app/dist ./dist
 USER 1000:1000
 EXPOSE 3000
 
+HEALTHCHECK --interval=5s --timeout=3s --start-period=5s --retries=5 \
+  CMD node -e "fetch('http://localhost:3000/api/version').then(r => process.exit(r.ok ? 0 : 1)).catch(() => process.exit(1))"
+
 ENTRYPOINT ["node"]
 CMD ["dist/index.js"]
