@@ -55,13 +55,20 @@ jobs:
       - name: Check /api/version
         run: |
           expected="$(jq -r .version package.json)"
-          actual="$(curl --fail --silent --retry 10 --retry-delay 1 --retry-connrefused http://localhost:3000/api/version | jq -r .version)"
+          response="$(curl --fail --silent --show-error --retry 10 --retry-delay 1 --retry-all-errors http://localhost:3000/api/version)"
+          echo "response=$response"
+          actual="$(echo "$response" | jq -r .version)"
           echo "expected=$expected actual=$actual"
           if [ "$expected" != "$actual" ]; then
-            echo "Error: Version mismatch! expected '$expected' from package.json, but endpoint returned '$actual'."
+            echo "Error: Version mismatch! expected '$expected', got '$actual'."
             exit 1
           fi
 
-      - name: Show container logs
-        if: always() # runs even when the previous step failed
-        run: docker logs hivebox
+      - name: Debug container
+        if: always()
+        run: |
+          docker ps -a
+          echo "--- logs ---"
+          docker logs hivebox
+          echo "--- probe ---"
+          curl -v http://localhost:3000/api/version || true       run: docker logs hivebox
